@@ -43,8 +43,18 @@ class MyCrawler:
             req = urllib.request.Request(item)
             html = urllib.request.urlopen(req)
             doc = html.read().decode('utf8')
-            url = re.findall(cf.DOWNLOAD_LINK_PATTERN, doc)[0]
-            print('Storing {}'.format(url))
+            temp = re.findall(cf.DOWNLOAD_LINK_PATTERN, doc)            
+            if temp:
+                url = temp[0]
+                print('Storing {}'.format(url))
+                f.write(url + '\n')    
+            else:
+                f2 = open('no_result.txt', 'a')
+                print('NO DOWNLOAD_LINK!')
+                print(item)
+                f2.write(item + '\n')
+                f2.close()
+                print('Storing {}'.format(url))
             f.write(url + '\n')
             time.sleep(7)
         f.close()
