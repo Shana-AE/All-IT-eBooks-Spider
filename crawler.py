@@ -55,7 +55,6 @@ class MyCrawler:
                 f2.write(item + '\n')
                 f2.close()
                 print('Storing {}'.format(url))
-            f.write(url + '\n')
             time.sleep(7)
         f.close()
 
